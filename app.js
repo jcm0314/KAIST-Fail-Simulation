@@ -106,6 +106,46 @@ function toggleSound() {
     }
 }
 
+// WEB SPEECH API (AI DUBBING / TTS)
+const ttsSynth = window.speechSynthesis;
+
+function speakDialogue(text, speaker) {
+    if (!ttsSynth) return;
+    
+    // Stop any ongoing speech
+    ttsSynth.cancel();
+    
+    // Do not dub SYSTEM narration to keep visual novel standard clean
+    if (speaker === "SYSTEM") return;
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+
+    // Voice profiling (pitch, rate adjustments per speaker type)
+    if (speaker === "의사") {
+        utterance.pitch = 0.85; // Low pitch calm doctor
+        utterance.rate = 0.95;
+    } else if (speaker === "지인의 복제본") {
+        utterance.pitch = 1.06; // High pitch robotic AI clone voice
+        utterance.rate = 1.0;
+    } else if (speaker === "주인공") {
+        utterance.pitch = 0.95; // Standard protagonist
+        utterance.rate = 1.05;
+    } else if (speaker === "행인" || speaker === "다른 행인" || speaker === "조문객" || speaker === "상주") {
+        utterance.pitch = 0.9;
+        utterance.rate = 1.0;
+    }
+
+    // Bind Korean Speech Voice if available
+    const voices = ttsSynth.getVoices();
+    const koVoice = voices.find(v => v.lang.includes("ko-KR"));
+    if (koVoice) {
+        utterance.voice = koVoice;
+    }
+
+    ttsSynth.speak(utterance);
+}
+
 // UPDATE STATISTICS DISPLAY
 function updateStatsDisplay() {
     barMourning.style.width = `${state.mourning}%`;
@@ -411,7 +451,7 @@ const storyScript = [
     // 40
     {
         speaker: "SYSTEM",
-        text: "시간이 흐르며, 누군가 세상을 떠나도 다시 만날 수 있다는 생각이 만연해지자 당신 역시 타인의 죽음을 상실로 받아들이지 않게 되었다.",
+        text: "시간이 흐르며, 누군가 세상을 떠나도 다시 만날 수 있다는 생각이 만연해지자 당신 역시 타인의 죽음을 상실로 받아지가 않게 되었다.",
         isEndingTrigger: true,
         endingType: "A"
     },
@@ -555,6 +595,9 @@ function renderDialogueStep() {
         step.action();
     }
 
+    // TTS AI Dubbing speak
+    speakDialogue(step.text, step.speaker);
+
     typeText(step.text);
 }
 
@@ -595,6 +638,9 @@ function makeChoice(choice) {
 
 // EVALUATE ENDINGS
 function evaluateEnding(endingType) {
+    // Cancel tts on ending
+    if (ttsSynth) ttsSynth.cancel();
+
     elPlayScreen.classList.remove('active');
     elEndingScreen.classList.add('active');
 
@@ -625,6 +671,9 @@ function evaluateEnding(endingType) {
 
 // RESET AND RESTART
 function restartGame() {
+    // Cancel tts on restart
+    if (ttsSynth) ttsSynth.cancel();
+
     state.mourning = 32;
     state.dependent = 45;
     state.compliance = 38;
