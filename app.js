@@ -119,9 +119,6 @@ function speakDialogue(text, speaker, audioPath) {
     if (ttsSynth) {
         ttsSynth.cancel();
     }
-    
-    // Do not dub SYSTEM narration
-    if (speaker === "SYSTEM") return;
 
     if (audioPath) {
         // Play high-quality pre-recorded Voice Actor MP3
@@ -150,6 +147,9 @@ function playTtsFallback(text, speaker) {
     } else if (speaker === "주인공") {
         utterance.pitch = 0.95;
         utterance.rate = 1.05;
+    } else if (speaker === "SYSTEM") {
+        utterance.pitch = 0.98; // Narrator tone
+        utterance.rate = 1.0;
     } else if (speaker === "행인" || speaker === "다른 행인" || speaker === "조문객" || speaker === "상주") {
         utterance.pitch = 0.9;
         utterance.rate = 1.0;
@@ -218,6 +218,7 @@ const storyScript = [
         text: "2036년 7월 1일. 서울 중앙 의료센터.",
         sceneTitle: "CHAPTER 1: 10년의 공백",
         background: "medical_room_2036.png",
+        audio: "audio/system_1.mp3",
         action: () => {
             elHologramFlicker.style.display = 'none';
         }
@@ -225,7 +226,8 @@ const storyScript = [
     // 1
     {
         speaker: "SYSTEM",
-        text: "당신은 2026년 교통사고 이후 의식을 잃었다가 10년 만에 깨어났다."
+        text: "당신은 2026년 교통사고 이후 의식을 잃었다가 10년 만에 깨어났다.",
+        audio: "audio/system_2.mp3"
     },
     // 2
     {
@@ -256,23 +258,27 @@ const storyScript = [
         speaker: "SYSTEM",
         text: "병원을 나온 당신은 낯선 서울 거리를 걷기 시작했다.",
         sceneTitle: "CHAPTER 2: 유령의 거리",
-        background: "seoul_street_2036.png"
+        background: "seoul_street_2036.png",
+        audio: "audio/system_3.mp3"
     },
     // 7
     {
         speaker: "SYSTEM",
-        text: "횡단보도 앞. 한 노인이 갑자기 쓰러졌다."
+        text: "횡단보도 앞. 한 노인이 갑자기 쓰러졌다.",
+        audio: "audio/system_4.mp3"
     },
     // 8
     {
         speaker: "SYSTEM",
-        text: "주변 사람들은 힐끗 바라볼 뿐 아무도 움직이지 않는다."
+        text: "주변 사람들은 힐끗 바라볼 뿐 아무도 움직이지 않는다.",
+        audio: "audio/system_5.mp3"
     },
     // 9: Choice 1
     {
         speaker: "SYSTEM",
         text: "당신은 어떻게 행동할 것인가?",
         isChoice: true,
+        audio: "audio/system_6.mp3",
         choices: [
             {
                 text: "[도와준다] 노인에게 다가가 도움을 호소하고 119를 부른다.",
@@ -342,24 +348,28 @@ const storyScript = [
     // 17: Common Path
     {
         speaker: "SYSTEM",
-        text: "드론이 와서 환자를 이송한다."
+        text: "드론이 와서 환자를 이송한다.",
+        audio: "audio/system_7.mp3"
     },
     // 18
     {
         speaker: "SYSTEM",
         text: "며칠 뒤, 당신은 과거의 지인이 세상을 떠났다는 연락을 받는다.",
         sceneTitle: "CHAPTER 3: 이주 센터",
-        background: "migration_center_2036.png"
+        background: "migration_center_2036.png",
+        audio: "audio/system_8.mp3"
     },
     // 19
     {
         speaker: "SYSTEM",
-        text: "하지만 모바일 안내장에는 장례식장이라는 단어 대신 ‘이주식’이라는 낯선 단어가 적혀 있었다."
+        text: "하지만 모바일 안내장에는 장례식장이라는 단어 대신 ‘이주식’이라는 낯선 단어가 적혀 있었다.",
+        audio: "audio/system_9.mp3"
     },
     // 20
     {
         speaker: "SYSTEM",
-        text: "이주센터에 도착한 당신. 빈소는 텅 비어 있고, 조문객은 다섯 명 남짓뿐이다."
+        text: "이주센터에 도착한 당신. 빈소는 텅 비어 있고, 조문객은 다섯 명 남짓뿐이다.",
+        audio: "audio/system_10.mp3"
     },
     // 21
     {
@@ -389,6 +399,7 @@ const storyScript = [
     {
         speaker: "SYSTEM",
         text: "빈소 중앙의 스크린이 켜지며, 방금 세상을 떠난 지인의 모습이 나타난다. 표정과 목소리, 생각까지 생전과 똑같은 완벽한 복제본이다.",
+        audio: "audio/system_11.mp3",
         action: () => {
             elHologramFlicker.style.display = 'block';
             flashScreen();
@@ -415,12 +426,14 @@ const storyScript = [
     // 29
     {
         speaker: "SYSTEM",
-        text: "사람들은 슬퍼하며 눈물을 흘리는 대신, 태블릿을 켜서 지인의 복제본과 일상적인 대화를 나누기 시작한다."
+        text: "사람들은 슬퍼하며 눈물을 흘리는 대신, 태블릿을 켜서 지인의 복제본과 일상적인 대화를 나누기 시작한다.",
+        audio: "audio/system_12.mp3"
     },
     // 30
     {
         speaker: "SYSTEM",
-        text: "죽음이 흔해지고 언제든 되돌릴 수 있는 일이 된 사회. 살아있는 사람들의 하루도 그만큼 가볍고 사소해져 있었다."
+        text: "죽음이 흔해지고 언제든 되돌릴 수 있는 일이 된 사회. 살아있는 사람들의 하루도 그만큼 가볍고 사소해져 있었다.",
+        audio: "audio/system_13.mp3"
     },
     // 31: Choice 2
     {
@@ -428,6 +441,7 @@ const storyScript = [
         text: "지인의 복제본이 당신에게 대화를 요청했다. 당신은 어떻게 반응할 것인가?",
         sceneTitle: "CHAPTER 4: 갈림길",
         isChoice: true,
+        audio: "audio/system_14.mp3",
         choices: [
             {
                 text: "[수락한다] 태블릿을 부르고 가상 복제본과의 일상 대화를 수락한다.",
@@ -471,27 +485,32 @@ const storyScript = [
     // 36
     {
         speaker: "SYSTEM",
-        text: "그날 이후, 당신은 매일 태블릿을 켜 지인의 복제본을 부르고 일상적인 대화를 나누기 시작했다."
+        text: "그날 이후, 당신은 매일 태블릿을 켜 지인의 복제본을 부르고 일상적인 대화를 나누기 시작했다.",
+        audio: "audio/system_15.mp3"
     },
     // 37
     {
         speaker: "SYSTEM",
-        text: "하지만 심리 전문가들의 경고처럼, 그것은 애도를 돕는 것이 아니라 지연시키는 과정일 뿐이었다."
+        text: "하지만 심리 전문가들의 경고처럼, 그것은 애도를 돕는 것이 아니라 지연시키는 과정일 뿐이었다.",
+        audio: "audio/system_16.mp3"
     },
     // 38
     {
         speaker: "SYSTEM",
-        text: "곁에 그 존재가 계속 '있으니' 부재가 처리되지 않았고, 당신은 애도의 첫 단계인 부정에 머문 채 끝내 작별하지 못했다."
+        text: "곁에 그 존재가 계속 '있으니' 부재가 처리되지 않았고, 당신은 애도의 첫 단계인 부정에 머문 채 끝내 작별하지 못했다.",
+        audio: "audio/system_17.mp3"
     },
     // 39
     {
         speaker: "SYSTEM",
-        text: "구독료로 슬픔을 계속 붙잡아두는 거대한 사업 모델에 당신도 완벽히 편입되고 말았다."
+        text: "구독료로 슬픔을 계속 붙잡아두는 거대한 사업 모델에 당신도 완벽히 편입되고 말았다.",
+        audio: "audio/system_18.mp3"
     },
     // 40
     {
         speaker: "SYSTEM",
         text: "시간이 흐르며, 누군가 세상을 떠나도 다시 만날 수 있다는 생각이 만연해지자 당신 역시 타인의 죽음을 상실로 받아들이지 않게 되었다.",
+        audio: "audio/system_19.mp3",
         isEndingTrigger: true,
         endingType: "A"
     },
@@ -517,22 +536,26 @@ const storyScript = [
     // 45
     {
         speaker: "SYSTEM",
-        text: "당신은 복제본과의 대화를 끊고 뒤돌아섰다."
+        text: "당신은 복제본과의 대화를 끊고 뒤돌아섰다.",
+        audio: "audio/system_20.mp3"
     },
     // 46
     {
         speaker: "SYSTEM",
-        text: "당신은 단호한 거절을 한 뒤 죽음이 되돌릴 수 있는 일이 되며 생명의 무게가 지워졌던 2036년의 사회에 작은 파문을 일으켰다."
+        text: "당신은 단호한 거절을 한 뒤 죽음이 되돌릴 수 있는 일이 되며 생명의 무게가 지워졌던 2036년의 사회에 작은 파문을 일으켰다.",
+        audio: "audio/system_21.mp3"
     },
     // 47
     {
         speaker: "SYSTEM",
-        text: "이후 당신은 '데스 리터러시(death literacy)' 교육을 정규 교육과정에 넣어야 한다고 목소리를 내기 시작했다."
+        text: "이후 당신은 '데스 리터러시(death literacy)' 교육을 정규 교육과정에 넣어야 한다고 목소리를 내기 시작했다.",
+        audio: "audio/system_22.mp3"
     },
     // 48
     {
         speaker: "SYSTEM",
         text: "또한 생전 본인의 의사로 사후 복제를 금지할 수 있는 '디지털 소생 거부(DDNR)' 조항을 법제화하는 시민운동에 뛰어들었다.",
+        audio: "audio/system_23.mp3",
         isEndingTrigger: true,
         endingType: "B"
     }

@@ -7,8 +7,34 @@ if (!fs.existsSync(audioDir)) {
     fs.mkdirSync(audioDir);
 }
 
-// Dialogues mapping using high-quality Microsoft Edge Neural Voices
+// Dialogues mapping using high-quality Microsoft Edge Neural Voices (including Narrator / SYSTEM)
 const dialogues = [
+    // Narration
+    { file: "system_1.mp3", voice: "ko-KR-SunHiNeural", text: "2036년 7월 1일. 서울 중앙 의료센터." },
+    { file: "system_2.mp3", voice: "ko-KR-SunHiNeural", text: "당신은 2026년 교통사고 이후 의식을 잃었다가 10년 만에 깨어났다." },
+    { file: "system_3.mp3", voice: "ko-KR-SunHiNeural", text: "병원을 나온 당신은 낯선 서울 거리를 걷기 시작했다." },
+    { file: "system_4.mp3", voice: "ko-KR-SunHiNeural", text: "횡단보도 앞. 한 노인이 갑자기 쓰러졌다." },
+    { file: "system_5.mp3", voice: "ko-KR-SunHiNeural", text: "주변 사람들은 힐끗 바라볼 뿐 아무도 움직이지 않는다." },
+    { file: "system_6.mp3", voice: "ko-KR-SunHiNeural", text: "당신은 어떻게 행동할 것인가?" },
+    { file: "system_7.mp3", voice: "ko-KR-SunHiNeural", text: "드론이 와서 환자를 이송한다." },
+    { file: "system_8.mp3", voice: "ko-KR-SunHiNeural", text: "며칠 뒤, 당신은 과거의 지인이 세상을 떠났다는 연락을 받는다." },
+    { file: "system_9.mp3", voice: "ko-KR-SunHiNeural", text: "하지만 모바일 안내장에는 장례식장이라는 단어 대신 ‘이주식’이라는 낯선 단어가 적혀 있었다." },
+    { file: "system_10.mp3", voice: "ko-KR-SunHiNeural", text: "이주센터에 도착한 당신. 빈소는 텅 비어 있고, 조문객은 다섯 명 남짓뿐이다." },
+    { file: "system_11.mp3", voice: "ko-KR-SunHiNeural", text: "빈소 중앙의 스크린이 켜지며, 방금 세상을 떠난 지인의 모습이 나타난다. 표정과 목소리, 생각까지 생전과 똑같은 완벽한 복제본이다." },
+    { file: "system_12.mp3", voice: "ko-KR-SunHiNeural", text: "사람들은 슬퍼하며 눈물을 흘리는 대신, 태블릿을 켜서 지인의 복제본과 일상적인 대화를 나누기 시작한다." },
+    { file: "system_13.mp3", voice: "ko-KR-SunHiNeural", text: "죽음이 흔해지고 언제든 되돌릴 수 있는 일이 된 사회. 살아있는 사람들의 하루도 그만큼 가볍고 사소해져 있었다." },
+    { file: "system_14.mp3", voice: "ko-KR-SunHiNeural", text: "지인의 복제본이 당신에게 대화를 요청했다. 당신은 어떻게 반응할 것인가?" },
+    { file: "system_15.mp3", voice: "ko-KR-SunHiNeural", text: "그날 이후, 당신은 매일 태블릿을 켜 지인의 복제본을 부르고 일상적인 대화를 나누기 시작했다." },
+    { file: "system_16.mp3", voice: "ko-KR-SunHiNeural", text: "하지만 심리 전문가들의 경고처럼, 그것은 애도를 돕는 것이 아니라 지연시키는 과정일 뿐이었다." },
+    { file: "system_17.mp3", voice: "ko-KR-SunHiNeural", text: "곁에 그 존재가 계속 '있으니' 부재가 처리되지 않았고, 당신은 애도의 첫 단계인 부정에 머문 채 끝내 작별하지 못했다." },
+    { file: "system_18.mp3", voice: "ko-KR-SunHiNeural", text: "구독료로 슬픔을 계속 붙잡아두는 거대한 사업 모델에 당신도 완벽히 편입되고 말았다." },
+    { file: "system_19.mp3", voice: "ko-KR-SunHiNeural", text: "시간이 흐르며, 누군가 세상을 떠나도 다시 만날 수 있다는 생각이 만연해지자 당신 역시 타인의 죽음을 상실로 받아들이지 않게 되었다." },
+    { file: "system_20.mp3", voice: "ko-KR-SunHiNeural", text: "당신은 복제본과의 대화를 끊고 뒤돌아섰다." },
+    { file: "system_21.mp3", voice: "ko-KR-SunHiNeural", text: "당신은 단호한 거절을 한 뒤 죽음이 되돌릴 수 있는 일이 되며 생명의 무게가 지워졌던 2036년의 사회에 작은 파문을 일으켰다." },
+    { file: "system_22.mp3", voice: "ko-KR-SunHiNeural", text: "이후 당신은 '데스 리터러시(death literacy)' 교육을 정규 교육과정에 넣어야 한다고 목소리를 내기 시작했다." },
+    { file: "system_23.mp3", voice: "ko-KR-SunHiNeural", text: "또한 생전 본인의 의사로 사후 복제를 금지할 수 있는 '디지털 소생 거부(DDNR)' 조항을 법제화하는 시민운동에 뛰어들었다." },
+
+    // Character Dialogues
     { file: "protagonist_1.mp3", voice: "ko-KR-InJoonNeural", text: "…… 여기가 어디지…?" },
     { file: "doctor_1.mp3", voice: "ko-KR-HyunsuNeural", text: "정신이 드셨군요 환자분. 환자분은 10년만에 깨어나 현재 2036년입니다." },
     { file: "protagonist_2.mp3", voice: "ko-KR-InJoonNeural", text: "2036년...? 무슨 소리죠?" },
@@ -37,16 +63,14 @@ const dialogues = [
 ];
 
 async function generateAll() {
-    console.log("Starting Edge Neural TTS voice generation...");
+    console.log("Starting Edge Neural TTS voice generation (narrative + dialogue)...");
     
-    // We instantiate TTS clients for each voice to ensure correct settings.
     const clients = {
         "ko-KR-InJoonNeural": new EdgeTTS({ voice: "ko-KR-InJoonNeural", lang: "ko-KR" }),
         "ko-KR-SunHiNeural": new EdgeTTS({ voice: "ko-KR-SunHiNeural", lang: "ko-KR" }),
         "ko-KR-HyunsuNeural": new EdgeTTS({ voice: "ko-KR-HyunsuNeural", lang: "ko-KR" })
     };
     
-    // Fallback client in case Hyunsu is not supported in the library version
     const fallbackClient = new EdgeTTS({ voice: "ko-KR-InJoonNeural", lang: "ko-KR" });
 
     for (let i = 0; i < dialogues.length; i++) {
