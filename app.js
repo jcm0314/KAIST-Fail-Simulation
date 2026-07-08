@@ -28,6 +28,7 @@ const elHologramFlicker = document.getElementById('hologram-flicker');
 const elSoundBtn = document.getElementById('sound-btn');
 const elLogList = document.getElementById('log-list');
 const elSceneTitle = document.getElementById('scene-title');
+const elVnStage = document.getElementById('vn-stage');
 
 // STAT BARS
 const barMourning = document.querySelector('#stat-mourning .stat-bar');
@@ -136,6 +137,7 @@ function shakeScreen() {
     setTimeout(() => elPlayScreen.classList.remove('shake'), 500);
 }
 
+// SCREEN FLASH EFFECT
 function flashScreen() {
     const flashDiv = document.createElement('div');
     flashDiv.className = 'flash';
@@ -150,13 +152,14 @@ function flashScreen() {
     setTimeout(() => flashDiv.remove(), 300);
 }
 
-// VISUAL NOVEL SCRIPT (Team's Customized Scenario)
+// VISUAL NOVEL SCRIPT (Team's Customized Scenario with Dynamic Backgrounds)
 const storyScript = [
     // 0
     {
         speaker: "SYSTEM",
         text: "2036년 7월 1일. 서울 중앙 의료센터.",
         sceneTitle: "CHAPTER 1: 10년의 공백",
+        background: "medical_room_2036.png",
         action: () => {
             elHologramFlicker.style.display = 'none';
         }
@@ -190,7 +193,8 @@ const storyScript = [
     {
         speaker: "SYSTEM",
         text: "병원을 나온 당신은 낯선 서울 거리를 걷기 시작했다.",
-        sceneTitle: "CHAPTER 2: 유령의 거리"
+        sceneTitle: "CHAPTER 2: 유령의 거리",
+        background: "seoul_street_2036.png"
     },
     // 7
     {
@@ -275,7 +279,8 @@ const storyScript = [
     {
         speaker: "SYSTEM",
         text: "며칠 뒤, 당신은 과거의 지인이 세상을 떠났다는 연락을 받는다.",
-        sceneTitle: "CHAPTER 3: 이주 센터"
+        sceneTitle: "CHAPTER 3: 이주 센터",
+        background: "migration_center_2036.png"
     },
     // 19
     {
@@ -290,7 +295,7 @@ const storyScript = [
     // 21
     {
         speaker: "주인공",
-        text: "이게... 장례식이라고? 사람이 왜 이렇게 없지?"
+        text: "이게... 장례식라고? 사람이 왜 이렇게 없지?"
     },
     // 22
     {
@@ -513,6 +518,11 @@ function renderDialogueStep() {
     // Update Chapter Title
     if (step.sceneTitle) {
         elSceneTitle.textContent = step.sceneTitle;
+    }
+
+    // Switch Background Image Dynamically
+    if (step.background) {
+        elVnStage.style.backgroundImage = `url('${step.background}')`;
     }
     
     // Speaker tag coloring
