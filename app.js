@@ -336,7 +336,7 @@ const storyScript = [
     // 21
     {
         speaker: "주인공",
-        text: "기억을 복제한다고...? 영원한 만남...?",
+        text: "(주변 광고판을 둘러 보며) \"기억을 복제한다고...? 영원한 만남...?\"",
         audio: "audio/protagonist_5b.mp3"
     },
     // 22
