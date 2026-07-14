@@ -441,13 +441,13 @@ const storyScript = [
                 text: "[수락한다] 태블릿을 부르고 가상 복제본과의 일상 대화를 수락한다.",
                 labelText: "2단계: 대화 수락 - 가상 이식",
                 effects: { mourning: -32, dependent: 45, compliance: -20 },
-                nextIndex: 32
+                nextIndex: 38
             },
             {
                 text: "[거절한다] 가짜 위로를 거부하고, 고인의 복제물 접촉 요구를 사절한다.",
                 labelText: "2단계: 대화 거절 - 현실 수용",
                 effects: { mourning: 48, dependent: -35, compliance: 32 },
-                nextIndex: 42
+                nextIndex: 48
             }
         ]
     },
