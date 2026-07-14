@@ -315,6 +315,36 @@ const storyScript = [
         text: "드론이 와서 환자를 이송한다.",
         audio: "audio/system_7.mp3"
     },
+    {
+        speaker: "주인공",
+        text: "저기요... 저 사람 죽을지도 모르잖아요! 다들 왜 이렇게 평온한 겁니까?",
+        audio: "audio/protagonist_5a.mp3"
+    },
+    {
+        speaker: "SYSTEM",
+        text: "하지만 사람들은 귀찮다는 듯 고개를 돌릴 뿐, 거리는 아무 일도 없었다는 듯 무심하게 흘러간다.",
+        audio: "audio/system_7a.mp3"
+    },
+    {
+        speaker: "SYSTEM",
+        text: "혼란스러운 당신은 광장 한복판에 우뚝 서서 주변을 둘러보았다.",
+        audio: "audio/system_7b.mp3"
+    },
+    {
+        speaker: "주인공",
+        text: "기억을 복제한다고...? 영원한 만남...?",
+        audio: "audio/protagonist_5b.mp3"
+    },
+    {
+        speaker: "주인공",
+        text: "내가 알던 세상이... 완전히 달라져 버렸잖아.",
+        audio: "audio/protagonist_5c.mp3"
+    },
+    {
+        speaker: "SYSTEM",
+        text: "그렇게 낯선 세상의 모습에 충격을 받은 채로 며칠의 시간이 흐른 어느 날.",
+        audio: "audio/system_7c.mp3"
+    },
     // 18
     {
         speaker: "SYSTEM",
