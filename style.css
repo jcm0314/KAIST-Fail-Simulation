@@ -677,6 +677,8 @@ body {
     min-width: 82px;
     text-align: center;
     letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .badge-red {
