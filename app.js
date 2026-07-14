@@ -166,6 +166,7 @@ function playTtsFallback(text, speaker) {
 
 // UPDATE STATISTICS DISPLAY
 function updateStatsDisplay() {
+    if (!barMourning || !valMourning || !barDependent || !valDependent || !barCompliance || !valCompliance) return;
     barMourning.style.width = `${state.mourning}%`;
     valMourning.textContent = `${state.mourning}%`;
     
@@ -178,6 +179,7 @@ function updateStatsDisplay() {
 
 // UPDATE DECISION LOG (Left UI Panel)
 function addDecisionLog(labelText, isRegulation = false) {
+    if (!elLogList) return;
     const emptyLog = elLogList.querySelector('.log-empty');
     if (emptyLog) emptyLog.remove();
 
@@ -622,7 +624,7 @@ function renderDialogueStep() {
     elSpeakerTag.textContent = step.speaker;
     
     // Update Chapter Title
-    if (step.sceneTitle) {
+    if (step.sceneTitle && elSceneTitle) {
         elSceneTitle.textContent = step.sceneTitle;
     }
 
@@ -757,7 +759,9 @@ function restartGame() {
     clearTimeout(state.typingTimeout);
     
     // Clear left log UI
-    elLogList.innerHTML = '<div class="log-empty">기록된 선택이 없습니다.</div>';
+    if (elLogList) {
+        elLogList.innerHTML = '<div class="log-empty">기록된 선택이 없습니다.</div>';
+    }
     
     updateStatsDisplay();
     elEndingScreen.classList.remove('active');
